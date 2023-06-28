@@ -5,12 +5,16 @@
             <el-table :data="list" stripe border style="width: 100%; margin-top: 10px">
                 <el-table-column prop="userId" label="学生ID" />
                 <el-table-column prop="studentName" label="姓名" />
-                <el-table-column prop="projectScore" label="成绩" />
+                <el-table-column prop="projectScore" label="成绩" style="color: red;">
+                    <template slot-scope="scope">
+                        <font color="red"><strong>{{ gradeMap[5 - scope.row.projectScore] }}</strong></font>
+                    </template>
+                </el-table-column>
                 <el-table-column label="课题状态" prop="projectStatus">
                     <template slot-scope="{ row }">
                         <el-badge
-                            :value="row.projectStatus === 0 ? '未提交' : row.projectStatus === 1 ? '开题报告' : row.projectStatus === 2 ? '期中小结' : '论文初稿'"
-                            :type="row.projectStatus === 0 ? 'warning' : 'success'"></el-badge>
+                            :value="row.paperStatus === 0 ? '未提交' : row.paperStatus === 1 ? '开题报告' : row.paperStatus === 2 ? '期中小结' : '论文初稿'"
+                            :type="row.paperStatus === 0 ? 'warning' : 'success'"></el-badge>
                     </template>
                 </el-table-column>
                 <el-table-column label="操作" width="200" align="center">
@@ -18,12 +22,8 @@
 
                         <el-button v-if="scope.row.projectScore === 0" type="primary" icon="el-icon-download"
                             :disabled="scope.row.paperStatus !== 3" @click="showDialog(scope.row)">评定成绩</el-button>
-                        <el-button v-if="scope.row.projectScore !== 0" type="success" icon="el-icon-check"
-                            :disabled="true"
+                        <el-button v-if="scope.row.projectScore !== 0" type="success" icon="el-icon-check" :disabled="true"
                             @click="showDialog(scope.row)">已评定</el-button>
-
-                        <el-button type="primary" icon="el-icon-download" :disabled="scope.row.projectScore != 0"
-                            @click="showDialog(scope.row)">评定成绩</el-button>
 
                     </template>
                 </el-table-column>
@@ -79,6 +79,7 @@ export default {
                     { required: true, message: '请选择论文成绩', trigger: 'change' }
                 ]
             },
+            gradeMap: ["优", "良", "中", "及格", "不及格"],
 
             form: {}
 
@@ -86,6 +87,9 @@ export default {
     },
     // 页面渲染成功后获取数据
     created() {
+        this.fetchData();
+    },
+    updated() {
         this.fetchData();
     },
 

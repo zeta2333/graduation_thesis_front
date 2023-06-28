@@ -8,13 +8,20 @@
                 <el-table-column prop="projectName" label="课题名称" />
                 <el-table-column prop="subjectName" label="专业名称" />
                 <el-table-column prop="paperTitle" label="提交文件" :formatter="formatFile" />
-                <el-table-column prop="projectScore" label="成绩" :formatter="formatScore" />
+                <el-table-column prop="projectScore" label="成绩" :formatter="formatScore">
+                    <template slot-scope="scope">
+                        <div :style="{ color: 'red' }">
+                            <strong>{{ scoreMap[scope.row.projectScore] }}</strong>
+                        </div>
+                    </template>
+                </el-table-column>
             </el-table>
         </el-card>
     </div>
 </template>
 <script>
 import api from "@/api/system/sysStudent";
+
 import { mapGetters } from "vuex";
 
 export default {
@@ -23,7 +30,14 @@ export default {
         return {
             listLoading: false,
             list: [], // 列表
-
+            scoreMap: [
+                '未评分',
+                '不及格',
+                '及格',
+                '中',
+                '良',
+                '优'
+            ]
 
         };
     },
@@ -58,14 +72,14 @@ export default {
                 0: '未评分',
                 1: '不及格',
                 2: '及格',
-                3: '中等',
-                4: '良好',
-                5: '优秀'
+                3: '中',
+                4: '良',
+                5: '优'
             };
             return scoreMap[row.projectScore] || '';
         },
         formatFile(row) {
-            return row.paperTitle == null ? "未提交文件": row.paperTitle
+            return row.paperTitle == null ? "未提交文件" : row.paperTitle
         }
 
     },
