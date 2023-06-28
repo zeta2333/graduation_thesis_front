@@ -15,11 +15,16 @@
                 </el-table-column>
                 <el-table-column label="操作" width="200" align="center">
                     <template slot-scope="scope">
+
                         <el-button v-if="scope.row.projectScore === 0" type="primary" icon="el-icon-download"
                             :disabled="scope.row.paperStatus !== 3" @click="showDialog(scope.row)">评定成绩</el-button>
                         <el-button v-if="scope.row.projectScore !== 0" type="success" icon="el-icon-check"
                             :disabled="true"
                             @click="showDialog(scope.row)">已评定</el-button>
+
+                        <el-button type="primary" icon="el-icon-download" :disabled="scope.row.projectScore != 0"
+                            @click="showDialog(scope.row)">评定成绩</el-button>
+
                     </template>
                 </el-table-column>
             </el-table>
@@ -74,6 +79,7 @@ export default {
                     { required: true, message: '请选择论文成绩', trigger: 'change' }
                 ]
             },
+
             form: {}
 
         };
@@ -145,6 +151,7 @@ export default {
             api.updateAssessGrade(this.student.id, this.form.score).then(
                 (response) => {
                     if (response.code == 200) {
+
                         this.form = {}
                         this.student = {}
                         this.$message.success("评分成功");
