@@ -13,7 +13,7 @@ export default {
   name: "Dashboard",
   role:"",
   computed: {
-    ...mapGetters(["name","role"]),
+    ...mapGetters(["name","role","userId"]),
   },
 };
 </script>

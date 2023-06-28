@@ -166,7 +166,7 @@ export default {
 
         // 加载banner列表数据
         fetchData(page = 1) {
-            debugger
+            // debugger
             this.page = page
             console.log('翻页。。。' + this.page)
 
