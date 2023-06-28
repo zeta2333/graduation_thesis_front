@@ -44,7 +44,7 @@ export default {
   data() {
     const validateUsername = (rule, value, callback) => {
       // if (!validUsername(value)) {
-      if (value.length < 5) {
+      if (value.length < 1) {
         callback(new Error("Please enter the correct user name"));
       } else {
         callback();
@@ -60,7 +60,7 @@ export default {
     return {
       loginForm: {
         username: "admin",
-        password: "111111",
+        password: "123456",
       },
       loginRules: {
         username: [
@@ -101,6 +101,7 @@ export default {
           this.$store
             .dispatch("user/login", this.loginForm)
             .then(() => {
+              window.location.reload();
               this.$message.success("登录成功!")
               this.$router.push({ path: this.redirect || "/" });
               this.loading = false;
