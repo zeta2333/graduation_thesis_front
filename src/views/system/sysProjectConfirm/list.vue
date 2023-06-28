@@ -32,15 +32,19 @@
             <el-table-column prop="teacherName" label="所属教师" />
             <el-table-column prop="status" label="课题状态">
                 <template slot-scope="scope">
+
                     {{ scope.row.status === 0 ? '待审核' : scope.row.status === 1 ? '审核通过待选择' : '已经有人选择' }}
+
                 </template>
             </el-table-column>
             <el-table-column label="操作" width="200" align="center">
                 <template slot-scope="scope">
+
                     <el-button type="primary" size="mini" :disabled="scope.row.status != 0"
                         @click="updateStatus(scope.row.id)">
                         {{ scope.row.status === 0 ? '待审核' : "审核已通过" }}
                     </el-button>
+
 
                 </template>
             </el-table-column>
@@ -101,6 +105,7 @@ export default {
             });
         },
         updateStatus(id) {
+
             console.log(this.sysProject);
             api.getById(id).then((response) => {
                 this.sysProject = response.data;
@@ -111,6 +116,7 @@ export default {
                         this.fetchData();
                     }
                 });
+
             });
         }
     },

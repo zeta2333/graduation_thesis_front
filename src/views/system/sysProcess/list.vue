@@ -18,8 +18,10 @@
                             <el-upload class="upload-demo" action :http-request="uploadFile" :on-success="uploadSuccess"
                                 ref="upload" :file-list="fileList" :before-upload="beforeUpload" :show-file-list="false"
                                 :headers="headers"><!-- 添加isUploadDisable变量 -->
+
                                 <el-button class="btn"><i class="el-icon-paperclip"></i>{{ scope.row.paperStatus === 3 ?
                                     "重新上传" : "上传文件" }}</el-button>
+
                             </el-upload>
                         </form>
                     </template>
@@ -75,11 +77,13 @@ export default {
 
             console.log(this.searchObj);
             apiStudent
+
                 .getByUserId(this.userId)
                 .then((response) => {
                     this.list = [response.data];
                     console.log("list值为：")
                     console.log(this.list)
+
                     // this.total = response.data.total;
                     // 数据加载并绑定成功
                 });
@@ -117,15 +121,14 @@ export default {
             formData.append('file', item.file);
             formData.append('userId', this.userId);
             apiStudent.upload(formData, this.headers).then((response) => {
+
                 if (response.code == "200");
+
                 this.$message.success('文件上传成功!');
             });;
         },
-
-
-
-
     },
 };
+
+
 </script>
-<style>

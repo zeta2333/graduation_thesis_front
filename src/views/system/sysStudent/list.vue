@@ -64,8 +64,10 @@
                 <el-form-item label="用户名" v-if="action != 'edit'">
                     <el-input v-model="sysStudent.username" />
                 </el-form-item>
+
                 <el-form-item label="密码"  v-if="action != 'edit'">
                     <el-input type="password" v-model="sysStudent.password" />
+
                 </el-form-item>
                 <el-form-item label="姓名">
                     <el-input v-model="sysStudent.studentName" />

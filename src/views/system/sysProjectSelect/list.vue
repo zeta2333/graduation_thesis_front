@@ -32,6 +32,7 @@
             <el-table-column prop="teacherName" label="所属教师" />
             <el-table-column label="操作" width="200" align="center">
                 <template slot-scope="scope">
+
                     <el-button type="primary" size="mini" @click="updateStatus(scope.row.id)" v-if="projectId === 0">
                         选择课题
                     </el-button>
@@ -39,6 +40,7 @@
                         v-if="projectId === scope.row.id">
                         已选择
                     </el-button>
+
                 </template>
             </el-table-column>
         </el-table>
@@ -62,12 +64,16 @@ export default {
             current: 1, // 页码
             size: 10, // 每页记录数
             searchObj: {}, // 查询条件
+
             projectId: ""
+
         };
     },
     // 页面渲染成功后获取数据
     created() {
+
         this.getUser();
+
         this.fetchData();
     },
     computed: {
@@ -75,11 +81,13 @@ export default {
     },
     // 定义方法
     methods: {
+
         getUser() {
             apiS.getByUserId(this.userId).then((response) =>
                 this.projectId = response.data.projectId
             );
         },
+
         fetchData(current = 1) {
             this.listLoading = true
             this.current = current;
@@ -112,7 +120,9 @@ export default {
             apiS.selectProject(this.userId, id).then((response) => {
                 if (response.code == 200) {
                     this.$message.success("选择成功")
+
                     this.getUser();
+
                     this.fetchData();
                 }
             });

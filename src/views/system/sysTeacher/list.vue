@@ -52,8 +52,10 @@
         <!-- 弹出层 -->
         <el-dialog :title="dialogTitle" :visible.sync="dialogVisible" width="40%" @close="close()">
             <el-form ref="dataForm" :model="sysTeacher" label-width="150px" size="small" style="padding-right: 40px">
+
                 <el-form-item v-for="(item, index) in formItems" :key="index" :label="item.label" >
                     <el-input :type="item.label==='密码'?'password':'text'" v-model="sysTeacher[item.prop]" />
+
                 </el-form-item>
             </el-form>
             <span slot="footer" class="dialog-footer">
@@ -98,7 +100,9 @@ export default {
                     { label: '性别', prop: 'gender' },
                     { label: '密码', prop: 'password' },
                     { label: '用户名', prop: 'username' },
+
                     { label: '手机号码', prop: 'tel' },
+
                 ];
             } else if (this.mode === 'edit') {
                 return [
