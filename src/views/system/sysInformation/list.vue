@@ -11,6 +11,14 @@
       </el-row>
       <el-row style="margin-bottom: 20px">
         <el-col :xs="8" :sm="6" :md="4" :lg="3">
+          <p>角色：</p>
+        </el-col>
+        <el-col :xs="16" :sm="18" :md="20" :lg="21">
+          <p>{{ role }}</p>
+        </el-col>
+      </el-row>
+      <el-row style="margin-bottom: 20px">
+        <el-col :xs="8" :sm="6" :md="4" :lg="3">
           <p>电话：</p>
         </el-col>
         <el-col :xs="16" :sm="18" :md="20" :lg="21">
@@ -57,7 +65,7 @@ export default {
   }
   ,
   computed: {
-        ...mapGetters(["userId"]),
+        ...mapGetters(["userId","role"]),
     },
   created() {
     this.fetchData();

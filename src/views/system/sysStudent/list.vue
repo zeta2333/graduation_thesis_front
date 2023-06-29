@@ -35,7 +35,7 @@
             <el-table-column prop="teacherName" label="课题教师" />
             <el-table-column prop="projectStatus" label="课题状态">
                 <template slot-scope="scope">
-                    {{ scope.row.projectStatus === 0 ? '未开始' : scope.row.projectStatus === 1 ? '进行中' : '已完成' }}
+                    {{ scope.row.projectStatus === 0 ? '未选题' : scope.row.projectStatus === 1 ? '已选题' : '已完成' }}
                 </template>
             </el-table-column>
             <el-table-column prop="subjectName" label="专业" />
@@ -65,7 +65,7 @@
                     <el-input v-model="sysStudent.username" />
                 </el-form-item>
 
-                <el-form-item label="密码"  v-if="action != 'edit'">
+                <el-form-item label="密码" v-if="action != 'edit'">
                     <el-input type="password" v-model="sysStudent.password" />
 
                 </el-form-item>

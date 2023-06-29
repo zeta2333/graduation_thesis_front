@@ -88,10 +88,7 @@ export default {
     // 页面渲染成功后获取数据
     created() {
         this.fetchData();
-    },
-    updated() {
-        this.fetchData();
-    },
+    },    
 
     computed: {
         ...mapGetters(["userId"])

@@ -39,10 +39,13 @@
             </el-table-column>
             <el-table-column label="操作" width="200" align="center">
                 <template slot-scope="scope">
-
-                    <el-button type="primary" size="mini" :disabled="scope.row.status != 0"
+                    <el-button v-if="scope.row.status === 0" :type="'primary'" size="mini" :disabled="scope.row.status != 0"
                         @click="updateStatus(scope.row.id)">
-                        {{ scope.row.status === 0 ? '待审核' : "审核已通过" }}
+                        {{ '待审核' }}
+                    </el-button>
+                    <el-button v-if="scope.row.status !== 0" icon="el-icon-check" :type="'success'" size="mini"
+                        :disabled="true">
+                        {{ "已过审" }}
                     </el-button>
 
 

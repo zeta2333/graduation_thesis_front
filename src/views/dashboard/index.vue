@@ -1,7 +1,8 @@
 <template>
   <div class="dashboard-container">
     <div class="dashboard-text">
-      欢迎您，{{ name }}
+      <h3> 欢迎您，{{ name }}</h3>
+      您的身份为：{{ role }}
     </div>
   </div>
 </template>
@@ -11,7 +12,7 @@ import { mapGetters } from "vuex";
 
 export default {
   name: "Dashboard",
-  role:"",
+  // role:"",
   computed: {
     ...mapGetters(["name","role","userId"]),
   },
