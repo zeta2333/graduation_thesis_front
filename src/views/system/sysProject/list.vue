@@ -1,18 +1,21 @@
 <template>
     <div>
         <div>
-            <el-card header="选题列表">
+            <el-card header="课题列表">
                 <el-button class="new-btn" type="success" icon="el-icon-plus" @click="add()">
-                    新增选题
+                    新增课题
                 </el-button>
                 <el-row :gutter="24">
-                    <el-col :lg="8" :md="12" :sm="24" :xs="24" v-for="(item, index) in list" :key="item.id">
+                    <el-col :lg="8" :md="12" :sm="24" :xs="24" v-for="(item) in list" :key="item.id">
                         <template>
                             <el-card class="box-card" style="width: 420px; height: 300px; position: relative;">
                                 <div>
-                                    <div slot="header" class="clearfix">{{ item.projectName }}</div>
+                                    <div slot="header" class="clearfix"> {{ item.projectName }} </div>
                                     <el-divider></el-divider>
                                     <div class="text">{{ item.description }}</div>
+                                    <div style="position: absolute; bottom: 30px; left: 20px; right: 30px;">
+                                        <el-badge :value="item.status === 0 ? '待审核' : '已过审'" :type="item.status === 0?'warning':'success'"></el-badge>
+                                    </div>
                                 </div>
                                 <div class="card-actions" style="position: absolute; bottom: 0px; left: 30px; right: 30px;">
                                     <el-button style="float: left;" type="text" @click="edit(item.id)">编辑</el-button>
@@ -28,13 +31,13 @@
 
         </div>
         <div>
-            <el-dialog :visible.sync="visible" title="选题信息填写" @close="close()">
-                <el-form :rules="rules" ref="formRef" :model="form" label-width="80px">
-                    <el-form-item label="选题名">
-                        <el-input v-model="form.projectName" placeholder="请输入选题名称" autocomplete="off" />
+            <el-dialog :visible.sync="visible" title="课题信息填写" @close="close()">
+                <el-form :rules="rules" ref="formRef" :model="form" label-width="100px">
+                    <el-form-item label="课题名称">
+                        <el-input v-model="form.projectName" placeholder="请输入课题名称" autocomplete="off" />
                     </el-form-item>
-                    <el-form-item label="选题详细信息">
-                        <el-input type="textarea" v-model="form.description" placeholder="请输入选题详细信息" autocomplete="off" />
+                    <el-form-item label="课题描述">
+                        <el-input type="textarea" v-model="form.description" placeholder="请输入课题详细信息" autocomplete="off" />
                     </el-form-item>
                 </el-form>
 
@@ -75,17 +78,17 @@ export default {
                     // required是否为必填项，非必填时可以不写
                     // message是不满足条件时的提示信息
                     // trigger是触发方式:blur失焦
-                    { required: true, message: "请输入选题名", trigger: "blur" },
+                    { required: true, message: "请输入课题名", trigger: "blur" },
                     { min: 5, message: "长度不少于 6 个字符", trigger: "blur" }
                     //validator自定义校验规则函数，一般提示需要必填就足够用了，不开这个
                     // { validator: this.validatePassword }
                 ],
                 projectDescribe: [
-                    { required: true, message: "请输入选题详细描述", trigger: "blur" },
+                    { required: true, message: "请输入课题详细描述", trigger: "blur" },
                     { max: 50, message: "长度不多于 50 个字符", trigger: "blur" }
                 ],
                 projectFromId: [
-                    { required: true, message: "请选择选题来源", trigger: "blur" },
+                    { required: true, message: "请选择课题来源", trigger: "blur" },
 
                 ]
             },

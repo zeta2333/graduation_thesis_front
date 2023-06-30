@@ -8,7 +8,7 @@
                 <el-table-column label="论文状态" prop="paperStatus">
                     <template slot-scope="{ row }">
                         <el-badge
-                            :value="row.paperStatus === 0 ? '未提交' : row.paperStatus === 1 ? '开题报告' : row.paperStatus === 2 ? '期中小结' : '论文初稿'"
+                            :value="row.paperStatus === 0 ? '未提交' : row.paperStatus === 1 ? '开题报告' : row.paperStatus === 2 ? '期中小结' : '论文终稿'"
                             :type="row.paperStatus === 0 ? 'warning' : 'success'"></el-badge>
                     </template>
                 </el-table-column>
@@ -77,8 +77,7 @@ export default {
                 });
 
         },
-        downloadFile(row) {
-            this.$message.success('文件下载成功!');
+        downloadFile(row) {            
             let url = "http://localhost:6815/system/sysFile/download?filename=" + row.paperPath;
             let link = document.createElement('a')
             link.style.display = 'none'
@@ -86,6 +85,7 @@ export default {
             document.body.appendChild(link)
             link.click()
             window.URL.revokeObjectURL(link.href);
+            this.$message.success('文件下载成功!');
         },
 
 

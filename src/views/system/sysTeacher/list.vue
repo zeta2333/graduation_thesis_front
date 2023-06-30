@@ -5,8 +5,8 @@
             <el-form label-width="70px" size="small">
                 <el-row>
                     <el-col :span="24">
-                        <el-form-item label="角色名称">
-                            <el-input style="width: 100%" v-model="searchObj.keyword" placeholder="角色名称"></el-input>
+                        <el-form-item label="关 键 词">
+                            <el-input style="width: 100%" v-model="searchObj.keyword" placeholder="教师姓名/研究方向/职位"></el-input>
                         </el-form-item>
                     </el-col>
                 </el-row>

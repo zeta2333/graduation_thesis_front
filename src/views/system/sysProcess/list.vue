@@ -8,7 +8,7 @@
                 <el-table-column label="论文状态" prop="paperStatus">
                     <template slot-scope="{ row }">
                         <el-badge
-                            :value="row.paperStatus === 0 ? '未提交' : row.paperStatus === 1 ? '开题报告' : row.paperStatus === 2 ? '期中小结' : '论文初稿'"
+                            :value="row.paperStatus === 0 ? '未提交' : row.paperStatus === 1 ? '开题报告' : row.paperStatus === 2 ? '期中小结' : '论文终稿'"
                             :type="row.paperStatus === 0 ? 'warning' : 'success'"></el-badge>
                     </template>
                 </el-table-column>
@@ -121,10 +121,9 @@ export default {
             formData.append('file', item.file);
             formData.append('userId', this.userId);
             apiStudent.upload(formData, this.headers).then((response) => {
-
                 if (response.code == "200");
-
                 this.$message.success('文件上传成功!');
+                this.fetchData();
             });;
         },
     },

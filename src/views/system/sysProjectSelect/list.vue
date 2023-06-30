@@ -5,8 +5,9 @@
             <el-form label-width="70px" size="small">
                 <el-row>
                     <el-col :span="24">
-                        <el-form-item label="角色名称">
-                            <el-input style="width: 100%" v-model="searchObj.keyword" placeholder="角色名称"></el-input>
+                        <el-form-item label="关 键 词">
+                            <el-input style="width: 100%" v-model="searchObj.keyword"
+                                placeholder="课题名称/课题描述/教师姓名"></el-input>
                         </el-form-item>
                     </el-col>
                 </el-row>
@@ -27,7 +28,7 @@
                 </template>
             </el-table-column>
 
-            <el-table-column prop="projectName" label="课题名" />
+            <el-table-column prop="projectName" label="课题名称" />
             <el-table-column prop="description" label="课题描述" />
             <el-table-column prop="teacherName" label="所属教师" />
             <el-table-column label="操作" width="200" align="center">
@@ -36,7 +37,7 @@
                     <el-button type="primary" size="mini" @click="updateStatus(scope.row.id)" v-if="projectId === 0">
                         选择课题
                     </el-button>
-                    <el-button icon="el-icon-check" type="success" size="mini" :disabled="scope.row.status != 1"
+                    <el-button icon="el-icon-check" type="success" size="mini" :disabled="true"
                         v-if="projectId === scope.row.id">
                         已选择
                     </el-button>
@@ -71,9 +72,7 @@ export default {
     },
     // 页面渲染成功后获取数据
     created() {
-
         this.getUser();
-
         this.fetchData();
     },
     computed: {
@@ -114,15 +113,15 @@ export default {
         fetchDataById(id) {
             api.getById(id).then((response) => {
                 this.sysRole = response.data;
+                this.fetchData();
             });
+
         },
         updateStatus(id) {
             apiS.selectProject(this.userId, id).then((response) => {
                 if (response.code == 200) {
                     this.$message.success("选择成功")
-
                     this.getUser();
-
                     this.fetchData();
                 }
             });

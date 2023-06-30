@@ -13,7 +13,7 @@
                 <el-table-column label="课题状态" prop="projectStatus">
                     <template slot-scope="{ row }">
                         <el-badge
-                            :value="row.paperStatus === 0 ? '未提交' : row.paperStatus === 1 ? '开题报告' : row.paperStatus === 2 ? '期中小结' : '论文初稿'"
+                            :value="row.paperStatus === 0 ? '未提交' : row.paperStatus === 1 ? '开题报告' : row.paperStatus === 2 ? '期中小结' : '论文终稿'"
                             :type="row.paperStatus === 0 ? 'warning' : 'success'"></el-badge>
                     </template>
                 </el-table-column>
